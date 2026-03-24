@@ -1,0 +1,11 @@
+=== Class -> Expert Preference (Top-2 after uniform warmup) ===
+airplane     -> [0.1455, 0.1353, 0.0137, 0.7055]   top-2 experts = [3, 0]
+automobile   -> [0.0553, 0.9262, 0.0037, 0.0148]   top-2 experts = [1, 0]
+bird         -> [0.4189, 0.006, 0.2007, 0.3743]   top-2 experts = [0, 3]
+cat          -> [0.5305, 0.0135, 0.4064, 0.0496]   top-2 experts = [0, 2]
+deer         -> [0.1589, 0.0025, 0.5977, 0.2409]   top-2 experts = [2, 3]
+dog          -> [0.4102, 0.0045, 0.5533, 0.0321]   top-2 experts = [2, 0]
+frog         -> [0.2446, 0.007, 0.7226, 0.0257]   top-2 experts = [2, 0]
+horse        -> [0.1723, 0.0036, 0.51, 0.3141]   top-2 experts = [2, 3]
+ship         -> [0.1746, 0.6963, 0.0053, 0.1238]   top-2 experts = [1, 0]
+truck        -> [0.0981, 0.8658, 0.0095, 0.0266]   top-2 experts = [1, 0]
