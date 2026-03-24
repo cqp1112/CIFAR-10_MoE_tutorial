@@ -1,4 +1,4 @@
-# MoE Tutorial / CIFAR-10 实验记录
+# 使用 CIFAR-10 数据集的 MoE Tutorial 实验记录
 
 一个面向入门与实践的 MoE（Mixture of Experts）小项目。这个仓库记录了围绕 **CIFAR-10 图像分类** 做的几组实验：从普通 CNN baseline 出发，逐步过渡到带有路由机制的 MoE 结构，并继续把专家形式从“hidden feature mixing”推进到更接近原生 FFN-MoE 的实现。
 
@@ -19,7 +19,7 @@
 - 解决训练初期容易出现的 **专家坍缩 / 路由偏科** 问题。
 
 ### Step 3：改成更贴近原生 MoE 的 FFNMix 版本
-在前一个版本基础上，我进一步把专家改写成更接近 Transformer 中 FFN 的形式：
+在前一个版本取得的稳健参数基础上，进一步把专家改写成更接近 Transformer 中 FFN 的形式：
 - 每个专家不再只输出 hidden；
 - 而是直接完成一套更完整的前馈映射；
 - 最终由 gate 对多个专家输出进行 Top-k 加权融合。
@@ -88,16 +88,7 @@
 
 在 `07_cifar10_moe_soft_hiddenmix.py` 的实验结果中，额外保存了一个 `class -> expert preference` 分析文件，观察每个类别更偏向哪些专家。
 
-部分结果如下：
-
-- `automobile -> [1, 0]`
-- `truck -> [1, 0]`
-- `deer -> [2, 3]`
-- `dog -> [2, 0]`
-- `cat -> [0, 2]`
-- `airplane -> [3, 0]`
-
-从这个现象上可以看到，专家并不随机工作，训练后已经出现了一定程度的**语义分工倾向**。虽然这还不是特别强、特别“纯”的专家专精，但已经能说明 gate 确实在学习“不同类别适合交给不同专家”这件事。
+可以证明，专家训练后已经出现了一定程度的**语义分工倾向**。虽然这还不是特别强、特别“纯”的专家专精，但已经能说明 gate 确实在学习“不同类别适合交给不同专家”这件事。
 
 ---
 
@@ -109,7 +100,6 @@ moe_tutorial/
 ├── 04_fashionmnist_baseline.py
 ├── 05_fashionmnist_moe.py
 ├── 06_cifar10_baseline.py
-├── 06_cifar10_optimized.py
 ├── 07_cifar10_moe_soft_hiddenmix.py
 ├── 08_cifar10_moe_ffnmix.py
 ├── data/
@@ -139,8 +129,6 @@ moe_tutorial/
 ### `06_cifar10_baseline.py`
 CIFAR-10 的普通 CNN baseline，也是后续 MoE 对比的基础。
 
-### `06_cifar10_optimized.py`
-对 baseline 的增强版本，加入了更强的数据增强与更长训练轮数。这个脚本目前已经写好，但仓库中暂时没有和它严格对应的独立结果总结文件，因此 README 里的主结果对比暂时以 baseline / HiddenMix / FFNMix 三组为主。
 
 ### `07_cifar10_moe_soft_hiddenmix.py`
 CIFAR-10 上的 HiddenMix MoE 版本：
@@ -173,7 +161,7 @@ pip install torch torchvision matplotlib
 DATA_ROOT = "/mnt/data"
 ```
 
-如果你不是在阿里云开发机或类似环境中运行，可以把脚本中的 `DATA_ROOT` 改成你自己的本地数据路径。
+如果不是在阿里云开发机或类似环境中运行，可以把脚本中的 `DATA_ROOT` 改成自己的本地数据路径。
 
 ### 运行示例
 
