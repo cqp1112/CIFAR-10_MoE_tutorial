@@ -18,8 +18,6 @@ except NameError:
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# 你的阿里云环境里通常把数据放在 /mnt/data
-# 如果你已经把 CIFAR-10 放在别处，也可以把这里改掉
 DATA_ROOT = "/mnt/data"
 
 print("当前工作目录 BASE_DIR:", BASE_DIR)
